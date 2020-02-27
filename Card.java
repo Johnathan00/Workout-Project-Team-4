@@ -9,32 +9,32 @@ package workout;
  *
  * @author Johnathan
  */
-enum Colour{ Red, Green, Blue, Yellow, Wild }
+enum Color{ Red, Green, Blue, Yellow, Wild }
 enum Value{ Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Skip, Draw2, Reverse, Wild, WildDraw4 }
 
 public class Card {
     
     //Instance Variables
-    private Colour colour;
+    private Color color;
     private Value value;
     
     //Constructor
-    public Card(Colour colour, Value value){
-        this.colour = colour;
+    public Card(Color color, Value value){
+        this.color = color;
         this.value = value;
     }
     
     //Mutators
-    public void setColour(Colour colour){
-        this.colour = colour;
+    public void setColor(Color color){
+        this.color = color;
     }
     public void setValue(Value value){
         this.value = value;
     }
     
     //Accessors
-    public Colour getColour(){
-        return colour;
+    public Color getColor(){
+        return color;
     }
     public Value getValue(){
         return value;
