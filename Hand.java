@@ -43,6 +43,7 @@ public class Hand {
             if(hand[i]!=null && 'R'==hand[i].charAt(0)){
                 Red_Cards[reds]=hand[i];
                 hand[i]="00";
+               reds+=1;
             }
         }
         return Red_Cards;
@@ -63,6 +64,7 @@ public class Hand {
             if(hand[i]!=null && 'B'==(hand[i].charAt(0))){
                 Blue_Cards[blues]=hand[i];
                 hand[i]="00";
+               blues+=1;
             }
         }
         return Blue_Cards;
@@ -83,6 +85,7 @@ public class Hand {
             if(hand[i]!=null && hand[i].charAt(0)=='G'){
                 Green_Cards[greens]=hand[i];
                 hand[i]="00";
+               greens+=1;
             }
         }
         return Green_Cards;
@@ -103,6 +106,7 @@ public class Hand {
             if(hand[i]!=null && (hand[i].charAt(0))=='Y'){
                 Yellow_Cards[yellows]=hand[i];
                 hand[i]="00";
+               yellows+=1;
             }
         }
         return Yellow_Cards;
