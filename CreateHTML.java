@@ -17,6 +17,8 @@ import java.io.PrintStream;
  */
 public class CreateHTML {
     
+    //called at beginning of program to create file
+    //no inputs
     public static void createFile () throws FileNotFoundException {
         File outputFile = new File("output.html");
         PrintStream output = new PrintStream (outputFile);
@@ -26,6 +28,8 @@ public class CreateHTML {
         output.println("<body>");
     }
 
+    //generic method to append a string to the file as a header
+    //takes string as input
     public static void writeHeader (String str) throws IOException{
         String tempLine = "";
         
@@ -35,6 +39,8 @@ public class CreateHTML {
         }
     }
     
+    //generic method to append string to file as normal paragraph text
+    //takes string as input
     public static void writeParagraph (String str) throws IOException{
         String tempLine = "";
         
@@ -44,6 +50,8 @@ public class CreateHTML {
         }
     }
     
+    //used to write round number
+    //takes int as input
     public static void writeRound (int num) throws IOException{
         String tempLine = "";
         
@@ -53,6 +61,9 @@ public class CreateHTML {
         }
     }
     
+    //NOT EDITED TO WORK WITH HAND CLASS YET
+    //used to write hand to file
+    //takes hand as an array
     public static void writeHand (String hand[]) throws IOException{
         String tempLine = "<p>";
         int i;
@@ -69,28 +80,27 @@ public class CreateHTML {
         }
     }
     
-    /*
-    public static void writeExercises (int blue, int green, int red, int yellow) throws IOException{
-        String tempLineB = "";
-        String tempLineG = "";
-        String tempLineR = "";
-        String tempLineY = "";
+    //used to write exercie amounts to file
+    //input is an array with format [color, exercise, number, True/False]
+    //true/flase is used to indicate if there is a break
+    public static void writeExercises (String [] exercises) throws IOException{
+        String tempLine = "";        
         
+        for (int i = 0; i < 4; i ++){
+            exercises[i] = exercises[i].replace("'", "");
+        }
         
         try (BufferedWriter print = new BufferedWriter(new FileWriter("output.html",true))) {
-            tempLineB = tempLineB.concat("<p>" + "Number of Blue exercise: " + blue + "</p>");
-            tempLineG = tempLineG.concat("<p>" + "Number of Green exercise: " + green + "</p>");
-            tempLineR = tempLineR.concat("<p>" + "Number of Red exercise: " + red + "</p>");
-            tempLineY = tempLineY.concat("<p>" + "Number of Yellow exercise: " + yellow + "</p>");
+            tempLine = tempLine.concat("<p>The number of " + exercises[1] + " to be completed is: " + exercises[2] + "</p>");
+            print.write(tempLine);
             
-            print.write(tempLineB);
-            print.write(tempLineG);
-            print.write(tempLineR);
-            print.write(tempLineY);
+            if ("True".equals(exercises[3])){
+                print.write("<p>Then, take a 1 minute break after completing these exercises!</p>");
+            }
         }
     }
-    */
     
+    /*
     public static void writeExercises (int blue, int green, int red, int yellow) throws IOException{
         
         try (BufferedWriter print = new BufferedWriter(new FileWriter("output.html",true))) {
@@ -114,6 +124,10 @@ public class CreateHTML {
         }
     }
     
+    */
+    
+    //used to write how many cards are left on the deck
+    //takes int as input
     public static void writeDeck (int num) throws IOException{
         String tempLine = "";
         
@@ -125,6 +139,10 @@ public class CreateHTML {
         }
     }
     
+    //used to write totals needed at the end of file
+    //currently takes each item as an int
+    //order is:  total number of exercises, total numver of exercises skipped, max amount of blue exercises completed in one hand,
+    //   max amount of green, max amount of red, and max amount of yellow
     public static void writeTotals (int total, int skipped, int maxblue, int maxgreen, int maxred, int maxyellow) throws IOException{
         String tempLineTotal = "";
         String tempLineSkipped = "";
@@ -147,15 +165,20 @@ public class CreateHTML {
             print.write(tempLineGreen);
             print.write(tempLineRed);
             print.write(tempLineYellow);
+            
+            print.write("</body>");
+            print.write("</html>");
         }
     }
     
+    /*
     public static void finishFile () throws IOException{
         try (BufferedWriter print = new BufferedWriter(new FileWriter("output.html",true))) {
             print.write("</body>");
             print.write("</html>");
         }
     }
+    */
 
 
 }
