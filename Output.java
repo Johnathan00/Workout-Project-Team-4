@@ -1,19 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package group_uno_workout;
 
 /**
  *
- * @author torti
+ * @author 
  */
 public class Output {
+//returns string for header with integer given in input
     public String print_header(int i){
         String header="<h1><u>Round " + i + "</u></h1>\n";
         return header;
     }
+//returns string of card with input of condensed version of card
     public String print_card(String card){
         
         if("B0".equals(card)){
