@@ -11,19 +11,38 @@ import java.util.Arrays;
  */
 public class Hand {
    private String[]hand;
-//constructor for hand
+   
+    /**
+     * constructor for hand
+     * 
+     * @param hand1  temp array from main
+     */
     public Hand(String[]hand1){
         hand=hand1;
     } 
-//sorts the hand
+
+    /**
+     * sorts the hand
+     */
     public void Sort_Hand(){
         Arrays.sort(hand);
     }
-//gets card at position in hand
+
+    /**
+     * gets card at position in hand
+     * 
+     * @param position position of card in the deck that you want to access
+     * @return true/false
+     */
     public String get_card(int position){
         return hand[position];
     } 
-//returns true if hand contains red skip, false otherwise
+
+    /**
+     * returns true if hand contains red skip, false otherwise
+     * 
+     * @return true/false
+     */
     public boolean contains_red_skip(){
         for(int i=0;i<hand.length;i++){
             if("RS".equals(hand[i])){
@@ -33,7 +52,12 @@ public class Hand {
         }
         return false;
     }
-//deletes all red cards from hand
+
+    /**
+     * deletes all red cards from hand
+     * 
+     * @return the deck excluding the red cards
+     */
     public String[] delete_reds(){
         String[]Red_Cards={"0","0","0","0","0","0","0"};
         int reds=0;
@@ -46,7 +70,12 @@ public class Hand {
         }
         return Red_Cards;
     }
-//returns true if hand contains blue skip, false otherwise
+
+    /**
+     * returns true if hand contains blue skip, false otherwise
+     * 
+     * @return true/false
+     */
     public boolean contains_blue_skip(){
         for(int i=0;i<hand.length;i++){
             if("BS".equals(hand[i])){
@@ -56,7 +85,12 @@ public class Hand {
         }
         return false;
     }
-//deletes all blue cards from hand
+
+    /**
+     * deletes all blue cards from hand
+     * 
+     * @return the deck excluding the blue cards
+     */
     public String[] delete_blues(){
         String[]Blue_Cards={"0","0","0","0","0","0","0"};
         int blues=0;
@@ -69,7 +103,12 @@ public class Hand {
         }
         return Blue_Cards;
     }
-//returns true if hand contains green skip, false otherwise
+
+    /**
+     * returns true if hand contains green skip, false otherwise
+     * 
+     * @return true/false
+     */
     public boolean contains_green_skip(){
         for(int i=0;i<hand.length;i++){
             if("GS".equals(hand[i])){
@@ -79,7 +118,12 @@ public class Hand {
         }
         return false;
     }
-//deletes all green cards from hand
+
+    /**
+     * deletes all green cards from hand
+     * 
+     * @return the deck excluding the green cards
+     */
     public String[] delete_greens(){
         String[]Green_Cards={"0","0","0","0","0","0","0"};
         int greens=0;
@@ -92,7 +136,12 @@ public class Hand {
         }
         return Green_Cards;
     }
-//returns true if hand contains yellow skip, false otherwise
+
+    /**
+     * returns true if hand contains yellow skip, false otherwise
+     * 
+     * @return true/false
+     */
     public boolean contains_yellow_skip(){
         for(int i=0;i<hand.length;i++){
             if("YS".equals(hand[i])){
@@ -102,7 +151,12 @@ public class Hand {
         }
         return false;
     }
-//deletes all yellow cards from hand
+
+    /**
+     * deletes all yellow cards from hand
+     * 
+     * @return the deck excluding yellow cards
+     */
     public String[] delete_yellows(){
         String[]Yellow_Cards={"0","0","0","0","0","0","0"};
         int yellows=0;
@@ -115,7 +169,12 @@ public class Hand {
         }
         return Yellow_Cards;
     }
-//returns true if hand contains red draw 2, false otherwise
+
+    /**
+     * returns true if hand contains red draw 2, false otherwise
+     * 
+     * @return true/false
+     */
     public int contains_red_draw2(){
         int red_draw2s=0;
         for(int i=0;i<hand.length;i++){
@@ -126,7 +185,12 @@ public class Hand {
         }
         return red_draw2s;
     }
-//returns true if hand contains blue draw 2, false otherwise
+
+    /**
+     * returns true if hand contains blue draw 2, false otherwise
+     * 
+     * @return true/false
+     */
     public int contains_blue_draw2(){
         int blue_draw2s=0;
         for(int i=0;i<hand.length;i++){
@@ -137,7 +201,12 @@ public class Hand {
         }
         return blue_draw2s;
     }
-//returns true if hand contains green draw 2, false otherwise
+
+    /**
+     * returns true if hand contains green draw 2, false otherwise
+     * 
+     * @return true/false
+     */
     public int contains_green_draw2(){
         int green_draw2s=0;
         for(int i=0;i<hand.length;i++){
@@ -148,7 +217,12 @@ public class Hand {
         }
         return green_draw2s;
     }
-//returns true if hand contains yellow draw 2, false otherwise
+
+    /**
+     * returns true if hand contains yellow draw 2, false otherwise
+     * 
+     * @return true/false
+     */
     public int contains_yellow_draw2(){
         int yellow_draw2s=0;
         for(int i=0;i<hand.length;i++){
@@ -159,7 +233,12 @@ public class Hand {
         }
         return yellow_draw2s;
     }
-//returns true if hand contains red reverse, false otherwise
+
+    /**
+     * returns true if hand contains red reverse, false otherwise
+     * 
+     * @return true/false
+     */
     public boolean contains_red_reverse(){
         for(int i=0;i<hand.length;i++){
             if("RR".equals(hand[i])){
@@ -169,7 +248,12 @@ public class Hand {
         }
         return false;
     }
-//returns true if hand contains blue reverse, false otherwise
+
+    /**
+     * returns true if hand contains blue reverse, false otherwise
+     * 
+     * @return true/false
+     */
     public boolean contains_blue_reverse(){
         for(int i=0;i<hand.length;i++){
             if("BR".equals(hand[i])){
@@ -179,7 +263,12 @@ public class Hand {
         }
         return false;
     }
-//returns true if hand contains green reverse, false otherwise
+
+    /**
+     * returns true if hand contains green reverse, false otherwise
+     * 
+     * @return true/false
+     */
     public boolean contains_green_reverse(){
         for(int i=0;i<hand.length;i++){
             if("GR".equals(hand[i])){
@@ -189,7 +278,12 @@ public class Hand {
         }
         return false;
     }
-//returns true if hand contains yellow reverse, false otherwise
+
+    /**
+     * returns true if hand contains yellow reverse, false otherwise
+     * 
+     * @return true/false
+     */
     public boolean contains_yellow_reverse(){
         for(int i=0;i<hand.length;i++){
             if("YR".equals(hand[i])){
@@ -199,7 +293,12 @@ public class Hand {
         }
         return false;
     }
-//returns an int for how many zero cards are in the hand
+
+    /**
+     * returns an int for how many zero cards are in the hand
+     * 
+     * @return integer for how many cards in the hand are a zero card
+     */
     public int contains_zeros(){
         int zeros=0;
         for(int i=0;i<hand.length;i++){
@@ -210,7 +309,12 @@ public class Hand {
         }
         return zeros;
     }
-//returns an int for how many wilds are in the hand
+
+    /** 
+     * returns an int for how many wilds are in the hand
+     * 
+     * @return int for how many cards in the hand are a wild card
+     */
     public int contains_wild(){
         int wilds=0;
         for(int i=0;i<hand.length;i++){
@@ -221,7 +325,12 @@ public class Hand {
         }
         return wilds;
     }
-//returns an int for how many wild draw 4s are in the hand
+
+    /**
+     * returns an int for how many wild draw 4s are in the hand
+     * 
+     * @return int for how many cards in the hand are a wild draw 4 card
+     */
     public int contains_wild4(){
         int wild4s=0;
         for(int i=0;i<hand.length;i++){
@@ -232,8 +341,14 @@ public class Hand {
         }
         return wild4s;
     }
-//returns an int for computation of workouts given in string input, only one color of 
-//card should be in string since it takes input straight from delete functions
+
+    /**
+     * returns an int for computation of workouts given in string input, only one color of 
+     * card should be in string since it takes input straight from delete functions
+     * 
+     * @param deletions string of cards that were deleted due to reverse card
+     * @return integer for amount of workouts skipped
+     */
     public int skipped_workouts(String[]deletions){
         int skips=0;
         for(int i=0;i<deletions.length;i++){
@@ -252,8 +367,14 @@ public class Hand {
         }
         return skips;
 }
-//returns in array of ints the workout values for each color of
-//card, adds number values of cards in hand
+
+
+    /**
+     * returns in array of ints the workout values for each color of
+     * card, adds number values of cards in hand
+     * 
+     * @return an array of integers indicating how many of each exercise to complete
+     */
     public int[]workout_values(){
         int[]workout_values={0,0,0,0,0};
         for(int i=0;i<hand.length;i++){
