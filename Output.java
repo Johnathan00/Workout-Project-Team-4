@@ -3,7 +3,7 @@ package group_uno_workout;
 
 /**
  *
- * @author 
+ * @author Cierra Ditmore
  */
 
 public class Output {
