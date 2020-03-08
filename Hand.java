@@ -1,11 +1,13 @@
-
 package group_uno_workout;
 
 import java.util.Arrays;
 
 /**
  *
- * @author 
+ * @author Sadman Ahmed Shanto
+ * @project 2
+ * @course CS 2365
+ *
  */
 public class Hand {
    private String[]hand;
