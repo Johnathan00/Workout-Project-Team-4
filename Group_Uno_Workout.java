@@ -11,39 +11,52 @@ import java.util.Scanner;
  */
 public class Group_Uno_Workout {
 
-   
+    /**
+     *
+     * @param args
+     * @throws IOException
+     */
+    
     public static void main(String[] args) throws IOException {
-//initializes variables
+        //initializes variables
         int user_number_of_decks=0;
         boolean user_action_cards;
         int user_shuffle_decks=-1;
         int[]workouts_skipped={0,0,0,0,0};
         int[]highest_values={0,0,0,0,0};
-//initiates scanner along with does user input
+        
+        //initiates scanner along with does user input
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter a number from 1-3 for how many decks you want");
+        System.out.print("Enter a number from 1-3 for how many decks you want: ");
+        
         while(user_number_of_decks!=1 && user_number_of_decks!=2 && user_number_of_decks!=3){
-        user_number_of_decks=in.nextInt();
-        if(user_number_of_decks!=1 && user_number_of_decks!=2 && user_number_of_decks!=3){
-            System.out.println("Invalid Input, Enter either a 1,2, or 3");
+            user_number_of_decks=in.nextInt();
+            if(user_number_of_decks!=1 && user_number_of_decks!=2 && user_number_of_decks!=3){
+                System.out.print("Invalid Input, Enter either a 1,2, or 3: ");
+            }
         }
-        }
-        System.out.println("Enter true if you want to play with action cards or false if you do not");
+        
+        System.out.print("Enter true if you want to play with action cards, or false if you do not: ");
         user_action_cards=in.nextBoolean();
-//initiates deck with user input then shuffles it based on user input
+        
+        //initiates deck with user input then shuffles it based on user input
         Deck d = new Deck(user_number_of_decks,user_action_cards);
+        
         if(user_number_of_decks!=1){
             while(user_shuffle_decks!=1 && user_shuffle_decks!=0){
-            System.out.println("Enter 1 if you want the decks shuffled together \nEnter 0 if you want the decks shuffled individually");
-            user_shuffle_decks=in.nextInt();
-            if(user_shuffle_decks!=1 && user_shuffle_decks!=0){
-                System.out.println("Invalid input, enter either a 0 or a 1");
-            }
+                System.out.print("Enter 1 if you want the decks shuffled together, or \nEnter 0 if you want the decks shuffled individually: ");
+                user_shuffle_decks=in.nextInt();
+                if(user_shuffle_decks!=1 && user_shuffle_decks!=0){
+                    System.out.print("Invalid input, enter either a 0 or a 1: ");
+                }
             }
         }
+        
         d.ShuffleDeck(user_shuffle_decks);
-//starts html file
-        FileWriter writer=new FileWriter("HTML_Output.html");
+        
+        //starts html file
+        FileWriter writer = new FileWriter("HTML_Output.html");
+        
         writer.write("<html>\n");
         int round=1;
         int total_push_ups=0;
@@ -51,105 +64,109 @@ public class Group_Uno_Workout {
         int total_lunges=0;
         int total_squats=0;
         int total_sit_ups=0;
-        Output o=new Output();
-//loop for how long to do program
+        Output o = new Output();
+        
+        //loop for how long to do program
         while(d.Get_cards_left()>0){
             writer.write(o.print_header(round));
             round+=1;
             String[]hand={"0","0","0","0","0","0","0"};
-//draws cards then throws them into a hand object
+            //draws cards then throws them into a hand object
             for(int i=0;i<hand.length;i++){
                 if(d.Get_cards_left()>0){
-                hand[i]=d.draw_card();
+                    hand[i]=d.draw_card();
                 }
             }
             Hand h=new Hand(hand);
             h.Sort_Hand();
-//prints hand
+            
+            //prints hand
             writer.write("<p>Hand is: | ");
             for(int i=0;i<hand.length;i++){
                 if(!"0".equals(hand[i])){
-                writer.write(o.print_card(hand[i])+" | ");
-                System.out.print(hand[i]+", ");
+                    writer.write(o.print_card(hand[i])+" | ");
+                    System.out.print(hand[i]+", ");
                 }
             }
             writer.write("</p>\n");
             System.out.print("\n");
             String[]deletions={"0","0","0","0","0","0","0"};
-//checks for skips and if contains skip it deletes the cards
-//of corresponding colors
-//also prints out what cards it deleted
+            
+        //checks for skips and if contains skip it deletes the cards
+        //of corresponding colors
+        //also prints out what cards it deleted
             if(h.contains_blue_skip()){
-                 deletions=h.delete_blues();
-                  workouts_skipped[0]+=h.skipped_workouts(deletions);
-                 writer.write("<p>Hand contains Blue Skip (Removes Blue Cards)<br> Removing Cards: | Blue Skip | ");
-                 for(int i=0;i<deletions.length;i++){
-                     if(!"0".equals(deletions[i])){
-                         writer.write(o.print_card(deletions[i]) + " | ");
-                     }
-                     else{
-                         break;
-                     }
-                 }
-                 writer.write("</p>\n");
-                 for(int i=0;i<deletions.length;i++){
-                     deletions[i]="0";
+                deletions=h.delete_blues();
+                workouts_skipped[0]+=h.skipped_workouts(deletions);
+                writer.write("<p>Hand contains Blue Skip (Removes Blue Cards)<br> Removing Cards: | Blue Skip | ");
+                for(int i=0;i<deletions.length;i++){
+                    if(!"0".equals(deletions[i])){
+                        writer.write(o.print_card(deletions[i]) + " | ");
+                    }
+                    else{
+                        break;
+                    }
+                }
+                writer.write("</p>\n");
+                for(int i=0;i<deletions.length;i++){
+                    deletions[i]="0";
                 }
             }
             if(h.contains_green_skip()){
                 deletions=h.delete_greens();
                 workouts_skipped[1]+=h.skipped_workouts(deletions);
                 writer.write("<p>Hand contains Green Skip (Removes Green Cards)<br> Removing Cards: | Green Skip | ");
-                 for(int i=0;i<deletions.length;i++){
-                     if(!"0".equals(deletions[i])){
-                         writer.write(o.print_card(deletions[i]) + " | ");
-                     }
-                     else{
-                         break;
-                     }
-                 }
-                 writer.write("</p>\n");
                 for(int i=0;i<deletions.length;i++){
-                deletions[i]="0";
+                    if(!"0".equals(deletions[i])){
+                        writer.write(o.print_card(deletions[i]) + " | ");
+                    }
+                    else{
+                        break;
+                    }
+                }
+                writer.write("</p>\n");
+                for(int i=0;i<deletions.length;i++){
+                    deletions[i]="0";
                 }
             }
             if(h.contains_red_skip()){
                 deletions=h.delete_reds();
-                 workouts_skipped[2]+=h.skipped_workouts(deletions);
+                workouts_skipped[2]+=h.skipped_workouts(deletions);
                 writer.write("<p>Hand contains Red Skip (Removes Red Cards)<br> Removing Cards: | Red Skip | ");
                  for(int i=0;i<deletions.length;i++){
-                     if(!"0".equals(deletions[i])){
-                         writer.write(o.print_card(deletions[i]) + " | ");
-                     }
-                     else{
-                         break;
-                     }
-                 }
-                 writer.write("</p>\n");
+                    if(!"0".equals(deletions[i])){
+                        writer.write(o.print_card(deletions[i]) + " | ");
+                    }
+                    else{
+                        break;
+                    }
+                }
+                writer.write("</p>\n");
                 for(int i=0;i<deletions.length;i++){
-                deletions[i]="0";
+                    deletions[i]="0";
                 }
             }
             if(h.contains_yellow_skip()){
                 deletions=h.delete_yellows();
-                 workouts_skipped[3]+=h.skipped_workouts(deletions);
+                workouts_skipped[3]+=h.skipped_workouts(deletions);
                 writer.write("<p>Hand contains Yellow Skip (Removes Yellow Cards)<br> Removing Cards: | Yellow Skip | ");
                  for(int i=0;i<deletions.length;i++){
-                     if(!"0".equals(deletions[i])){
-                         writer.write(o.print_card(deletions[i]) + " | ");
-                     }
-                     else{
-                         break;
-                     }
-                 }
-                 writer.write("</p>\n");
+                    if(!"0".equals(deletions[i])){
+                        writer.write(o.print_card(deletions[i]) + " | ");
+                    }
+                    else{
+                        break;
+                    }
+                }
+                writer.write("</p>\n");
                 for(int i=0;i<deletions.length;i++){
-                deletions[i]="0";
+                    deletions[i]="0";
                 }
             }
             int[]contains={0,0,0,0,0,0};
-//checks for if hand contains draw2 cards
-//then prints out corresponding statements
+            
+        //checks for if hand contains draw2 cards
+        //then prints out corresponding statements
             contains[0]=h.contains_blue_draw2();
             if(contains[0]!=0){
                 writer.write("<p>Hand Contains " + contains[0] + " Blue Draw 2s (Multiplies by 2 the amount of Push Ups)</p>\n");
@@ -166,9 +183,10 @@ public class Group_Uno_Workout {
             if(contains[3]!=0){
                 writer.write("<p>Hand Contains " + contains[3] + " Yellow Draw 2s (Multiplies by 2 the amount of Squats)</p>\n");
             }
-//checks for if hand contains reverses
-//then throws cards back into deck if
-//reverse is there
+            
+        //checks for if hand contains reverses
+        //then throws cards back into deck if
+        //reverse is there
             if(h.contains_blue_reverse()){
                 deletions=h.delete_blues();
                 int blue_cards=0;
@@ -176,25 +194,25 @@ public class Group_Uno_Workout {
                 for(int i=0;i<deletions.length;i++){
                     if(!"0".equals(deletions[i])){
                         if(!"BR".equals(hand[i])){
-                         blue_cards+=1;
+                            blue_cards+=1;
                             if(blue_cards==1){
                                 writer.write(" Returning Cards: | ");
                             }
                             writer.write(o.print_card(deletions[i]) + " | ");
                         }
-                     }
-                     else{
-                         break;
-                     }
+                    }
+                    else{
+                        break;
+                    }
                 }
                 writer.write("</p>\n");
                 for(int i=0;i<deletions.length;i++){
-                if(!"0".equals(deletions[i])){
-                    if(!"BR".equals(deletions[i])){
-                    d.return_card(deletions[i]);
-                    deletions[i]="0";
+                    if(!"0".equals(deletions[i])){
+                        if(!"BR".equals(deletions[i])){
+                            d.return_card(deletions[i]);
+                            deletions[i]="0";
+                        }
                     }
-                }
                 }
             }
             if(h.contains_green_reverse()){
@@ -212,7 +230,7 @@ public class Group_Uno_Workout {
                         }
                     }
                     else{
-                         break;
+                        break;
                     }
                 }
                 writer.write("</p>\n");
@@ -283,7 +301,8 @@ public class Group_Uno_Workout {
                     }
                 }
             }
-//checks for it hand contains wild cards and prints out corresponding statements
+            
+        //checks for it hand contains wild cards and prints out corresponding statements
             contains[4]=h.contains_wild();
             if(contains[4]!=0){
                 writer.write("<p>Hand Contains " + contains[4] + " Wild Cards (Adds 10 Burpees to Workout)</p>\n");
@@ -292,7 +311,8 @@ public class Group_Uno_Workout {
             if(contains[5]!=0){
                 writer.write("<p>Hand Contains " + contains[5] + " Wild Draw 4 Cards (Adds 10 Burpees to Workout + Multiplies the number of repetitions in every workout by 4)</p>\n");
             }
-//checks for if hand contains zero cards and prints out corresponding statements
+            
+        //checks for if hand contains zero cards and prints out corresponding statements
             int zeros=h.contains_zeros();
             if(zeros!=0){
                 writer.write("<p> Hand contains " + zeros + " zeros Take a " + zeros + " minute break after your workout this hand</p>\n");
@@ -306,8 +326,9 @@ public class Group_Uno_Workout {
                 }
                 writer.write("</p>\n");
             }
-//calculates workout values and then does action
-//card computations to them
+            
+    //calculates workout values and then does action
+    //card computations to them
             int[]workout_values={0,0,0,0,0};
             workout_values=h.workout_values();
             if(contains[0]!=0){
@@ -332,13 +353,14 @@ public class Group_Uno_Workout {
                 workout_values[2]=workout_values[2]*(int)Math.pow(4,contains[5]);
                 workout_values[3]=workout_values[3]*(int)Math.pow(4,contains[5]);
             }
-//adds to total values
+            
+        //adds to total values
             total_push_ups+=workout_values[0];
             total_lunges+=workout_values[1];
             total_sit_ups+=workout_values[2];
             total_squats+=workout_values[3];
             total_burpees+=workout_values[4];
-//compares to see if value is the highest one
+        //compares to see if value is the highest one
             if(highest_values[0]<workout_values[0]){
                 highest_values[0]=workout_values[0];
             }
@@ -354,7 +376,8 @@ public class Group_Uno_Workout {
             if(highest_values[4]<workout_values[4]){
                 highest_values[4]=workout_values[4];
             }
-//prints workout values
+            
+        //prints workout values
             writer.write("<p>Values for each workout are:<br>");
             writer.write("Push Ups = " + workout_values[0] + "<br>");
             writer.write("Lunges = " + workout_values[1] + "<br>");
@@ -367,7 +390,8 @@ public class Group_Uno_Workout {
             System.out.print("\n");
             writer.write("<p> Cards Left: " + d.Get_cards_left() + "</p>\n");
         }
-//prints summary information and closes writer
+        
+    //prints summary information and closes writer
         writer.write("<h1><u>Summary</u></h1>\n");
         writer.write("<p><u>Total Values for each workout are:</u><br>");
         writer.write("Push Ups = " + total_push_ups + "<br>");
