@@ -11,7 +11,13 @@ public class Deck {
     private int end_position,start,cards_left,number_of_decks;
     private boolean is_action_cards;
     private String[]deck;
-//creates Deck based on number of them user wants and if user wants action cards
+
+    /**
+     * creates Deck based on number of them user wants and if user wants action cards
+     * 
+     * @param number_of_decks integer showing how many decks the user wants to include
+     * @param is_action_cards boolean indicating if the user wants to include action cards
+     */
     public Deck(int number_of_decks,boolean is_action_cards){
         this.number_of_decks=number_of_decks;
         this.is_action_cards=is_action_cards;
@@ -53,7 +59,14 @@ public class Deck {
         }
         
         }
-//actually makes the decks
+
+    /**
+     * actually makes the decks
+     * 
+     * @param decks integer for amount of decks to be used
+     * @param action_cards boolean for if action cards are to be included
+     * @return
+     */
     public String[]filldeck(int decks,boolean action_cards){
         String[]Deck=new String[600];
         String[]colors={"B","G","R","Y"};
@@ -301,8 +314,13 @@ public class Deck {
         }
         return Deck;
     }
-//shuffles the deck based on if user wants them shuffled together or
-//individually
+
+    /**
+     * shuffles the deck based on if user wants them shuffled together or
+     * individually
+     * 
+     * @param together  1 = shuffle together, 0 = do not shuffle together
+     */
     public void ShuffleDeck(int together){
         Random rand=new Random();
         int rand_int;
@@ -439,47 +457,97 @@ public class Deck {
             }
         }
         }
+
+    
+    /**
+     * @return integer indicating the position of the last card in the deck
+     */
     public int get_end_position(){
         return end_position;
     }
+
+    /**
+     * increments the end position variable
+     */
     public void increment_end_position(){
         end_position=end_position+1;
     }
-//gets and returns card at position in deck
+    
+    /**
+     * gets and returns card at position in deck
+     * 
+     * @param position integer representing position of card in deck
+     * @return card at specified position
+     */
     public String getCards(int position){
         return deck[position];
     }
-//changes card at position in deck
+
+    /**
+     * changes card at position in deck
+     * 
+     * @param new_value value to be swapped at specified position
+     * @param position position of card in deck to be swapped with
+     */
     public void setCards(String new_value,int position){
         deck[position]=new_value;
     }
+
+    /**
+     * @return integer for start value
+     */
     public int getStart(){
         return start;
     }
+
+    /**
+     * increment the start of the deck
+     */
     public void start_increment(){
         start=start+1;
     }
+
+    /**
+     * @return the integer value indicating how many cards are left in the deck
+     */
     public int Get_cards_left(){
         return cards_left;
     }
+
+    /**
+     * decrement the amount of cards left in deck
+     */
     public void cards_left_decrement(){
         cards_left=cards_left-1;
     }
-//returns card at start of deck and increments start
+
+    /**
+     * returns card at start of deck and increments start
+     * 
+     * @return the card at the top of the deck
+     */
     public String draw_card(){
         int start=getStart();
         start_increment();
         cards_left_decrement();
         return getCards(start);
     }
+
+    /**
+     * increment the amount of cards left on the deck
+     */
     public void cards_left_increment(){
         cards_left=cards_left+1;
     }
-//puts card back in deck, increments end
+
+    /**
+     * puts card back in deck, increments end
+     * 
+     * @param card the card to be added back to the deck
+     */
     public void return_card(String card){
         setCards(card,get_end_position()+1);
         increment_end_position();
         cards_left_increment();
     }
 }
-
