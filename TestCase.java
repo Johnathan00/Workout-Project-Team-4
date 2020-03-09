@@ -1,9 +1,8 @@
 package group_uno_workout;
 
 /**
- *
- * 
- * @author cmdma
+ * Main Author: Meghan Engert
+ * Secondary Author: Cierra Ditmore
  */
 public class TestCase {
 
