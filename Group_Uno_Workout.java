@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author 
+ * @author Johnathan Gressick
  */
 public class Group_Uno_Workout {
 
