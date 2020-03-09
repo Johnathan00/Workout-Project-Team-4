@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Johnathan Gressick
+ * @author Johnathan Gressick and Meghan Engert
  */
 public class Group_Uno_Workout {
 
